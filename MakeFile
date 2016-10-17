@@ -1,0 +1,16 @@
+# Set some standard variables , CC is the compiler . CFLAGS set compiler options
+CC=gcc
+CFLAGS =-g -Wall
+
+# The first target is the default , traditionally , all means build everything
+all : RanNumMain list # These are my two targets
+RanNumMain : RanNumMain.o First.o Total.o# The " RanNumMain " application requires those two o files
+	$(CC) RanNumMain.o First.o Total.o -o RanNumMain
+RanNumMain.o: RanNumMain.c # The RanNumMain object is from this c file
+	$(CC) $(CFLAGS) -c RanNumMain.c
+First.o: First.c RanNum.h #The First object depends on these files
+	$(CC) $(CFLAGS) -c First.c
+Total.o: -c Total.c
+	$(CC) $(CFLAGS) -c Total.c
+	clean : # Remove all the target files , just leaving code (Be careful !)
+		rm -f *.o main
